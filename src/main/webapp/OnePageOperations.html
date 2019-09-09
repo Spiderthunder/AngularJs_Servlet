@@ -1,0 +1,83 @@
+<html>
+<title>Servizio $http</title>
+<!--In Generale Angular è un Framework che trasforma HTML in un linguaggio per lo sviluppo di web application -->
+<meta charset="utf-8" />
+
+<body ng-app="myApp">
+
+
+    <!-- con ng-app indico quale elemento della pagina va preso in considerazione per usarlo come interfaccia API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+    <!-- ho dovuto laciare il vecchio path perchè il programma effettua chiamate Ajax al server-->
+
+
+    <h1>Servizio $http </h1>
+    <script type = "text/javascript">
+
+        angular.module("myApp", [])
+            .controller("elencoController", function ($scope, $http) {
+               var promise=$http.get("elenco_citta.json");
+                  promise.success(function (data) {
+                        $scope.elencoCitta = data;
+                    });
+                    promise.error(function () {
+                        $scope.errore="Si è verificato un errore!";
+                    });
+            })
+            .controller("cittaController", function ($scope, $http) {
+                $scope.aggiungiCitta = function () {
+                    $http.post("http://localhost:8081/ToMaven/scrivi?nome=" + $scope.nome + "&regione=" + $scope.regione)
+                        .success(function () {
+                           $scope.successo= "Città aggiunta correttamente!";
+                        })
+                        .error(function () {
+                            $scope.fallimento="Spiacente città non aggiunta!";
+                        });
+                };
+            });
+        
+        angular.module("myApp", ['ngRoute'])
+        	.config(function($routeProvider){
+        		$routeProvider.when("/mostra" , {
+        			templateUrl : "mostraCitta.html",
+        			controller : "elencoController"
+        		}
+        	}).when("/aggiungi" , {
+        		templateUrl : "aggiungiCitta.html".
+        		controller : "cittaController"
+        	}).otherwise("/home" , {
+        		templateUrl : "home.html"
+        	})
+        
+      
+       </script>
+
+
+    <div ng-controller="elencoController">
+    <p> Server response:{{elencoCitta}} </p>
+     <p>Error:{{errore}}</p>
+                
+    </div>
+
+     AGGIUNGO CITTA
+    <div ng-controller="cittaController">
+        <p>Città: <input id="nome" name="nome" type="text" ng-model="nome" required/></p>
+        <p>Regione: <input id="regione" name="regione" type="text" ng-model="regione" required/></p>
+        <p><button ng-click="aggiungiCitta()">Aggiungi</button></p>
+        <p> Server response:{{successo}} </p>
+        <p>Error:{{fallimento}}</p>
+    </div>
+
+<!--
+    Questo servizio consente di effettuare chiamate Ajax al server 
+    e di gestire le risposte in maniera molto semplice.
+    I metodi del servizio $http restituiscono delle promise, 
+    cioè degli oggetti che consentono di gestire in maniera strutturata
+    l’esito di chiamate asincrone.
+
+-->
+
+</body>
+
+</html>

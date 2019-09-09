@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Regioni e Città d'Italia</title>
+	</head>
+	<body>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+		<div ng-controller="cittaController">
+	        <p>Città: <input id="nome" name="nome" type="text" ng-model="nome" required/></p>
+	        <p>Regione: <input id="regione" name="regione" type="text" ng-model="regione" required/></p>
+	        <p><button ng-click="aggiungiCitta()">Aggiungi</button></p>
+	        <p> Server response:{{successo}} </p>
+	        <p>Error:{{fallimento}}</p>
+   		</div>
+	</body>
+</html>

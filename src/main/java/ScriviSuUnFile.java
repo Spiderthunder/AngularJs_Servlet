@@ -42,7 +42,7 @@ public class ScriviSuUnFile extends HttpServlet {
 		String nome = request.getParameter("nome");
 		
 		//STRINGHE UTILI
-		String nomeFile = "C:/Users/salvatore.venditti/eclipse-workspace/WebToMaven/src/main/webapp/elenco_citta.json";
+		String nomeFile = "C:/Users/salvatore.venditti/eclipse-workspace/AngularJs_Servlet/src/main/webapp/elenco_citta.json";
 		String cost = "";
 		String jsonFinale = "";
 		
