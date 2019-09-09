@@ -84,8 +84,8 @@ public class ScriviSuUnFile extends HttpServlet {
 			response.setContentType("application/txt");
             PrintWriter out = response.getWriter();  
             out.print(jsonFinale);
-            out.flush(); 
-           
+            out.flush();        
+            
 		}catch(Exception e){
 			e.printStackTrace();
 		}
