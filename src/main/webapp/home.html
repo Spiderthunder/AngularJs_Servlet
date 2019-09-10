@@ -31,16 +31,24 @@
 		        		templateUrl : "home.html"
 	        		})
 	        	})      
-	       
+	        	
 	          .controller("elencoController", function ($scope, $http) {
+				 $scope.array = [];
 	             var promise=$http.get("elenco_citta.json");
 	                promise.success(function (data) {
 	                      $scope.elencoCitta = data;
+	                      for(var first in $scope.elencoCitta){
+	                    	  first = $scope.elencoCitta[first];
+	                    	  for(var second in first){
+	                    		  second = first[second];
+	                    		  $scope.array.push(second);
+	                    	  }
+	                      }
 	                  });
 	                  promise.error(function () {
 	                      $scope.errore="Si è verificato un errore!";
 	                  });
-	          })
+	          	})
 	          
 	            .controller("cittaController", function ($scope, $http) {
                 $scope.aggiungiCitta = function () {

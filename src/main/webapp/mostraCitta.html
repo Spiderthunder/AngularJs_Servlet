@@ -3,14 +3,30 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Regioni e Citta' d'Italia</title>
+		
+		<style>
+			table, th, td {
+  				border: 1px solid black;
+			}	
+		</style>
+		
 	</head>
 	<body>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 	
 		<div ng-controller="elencoController">
-			<h2>Lista Citta':</h2> <br>
-			{{elencoCitta}}
+			<h2>Lista Citta' Italiane:</h2> <br>
+			<table>
+				<thead>
+					<tr><td><b>Regione</b></td><td><b>Citta'</b></td></tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="infos in array">
+					<td>{{infos.regione}}</td><td>{{infos.nome}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</body>
 </html>
